@@ -13,7 +13,7 @@ FONTSIZE = 14
 #matplotlib.rcParams.update({'font.size': FONTSIZE})
 
 labels = ['KMNC', 'NC', 'TKNC']
-style = ['r-o', 'g--^', 'm-.*']
+style = ['r-o', 'g--^', 'm-.D']
 
 
 class Plot(object):
@@ -38,12 +38,11 @@ class Plot(object):
         print(data)
         fig, ax = plt.subplots(figsize=(5, 5))
         for i in range(3):
-            ax.plot(data[2*i], data[2*i+1], style[i], label=labels[i])
+            ax.plot(data[2*i], data[2*i+1], style[i], label=labels[i]) #, markersize=4
         ax.set_ylabel('Average Coverage', fontsize=FONTSIZE)
         ax.set_xlabel('Test Suite Size', fontsize=FONTSIZE)
         # ax.set_title(self.title.replace('_', '\\_'))
         ax.set_xticks(np.arange(1100, step=100))
-        #ax.set_ylim((-0.1, 0.65))
         ax.yaxis.set_tick_params(labelsize=FONTSIZE - 4)
         ax.xaxis.set_tick_params(labelsize=FONTSIZE - 4)
         ax.legend(fontsize=FONTSIZE - 4, loc='lower right')

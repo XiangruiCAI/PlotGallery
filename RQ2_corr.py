@@ -13,7 +13,8 @@ FONTSIZE = 14
 #matplotlib.rcParams.update({'font.size': FONTSIZE})
 
 labels = ['KMNC', 'NC', 'TKNC']
-style = ['r-o', 'g--^', 'm-.*']
+style = ['r-o', 'g--^', 'm-.D']
+style_wo_mark = ['r-', 'g--', 'm-.']
 
 
 class Plot(object):
@@ -38,7 +39,14 @@ class Plot(object):
         print(data)
         fig, ax = plt.subplots(figsize=(5, 5))
         for i in range(3):
-            ax.plot(data[2*i], data[2*i+1], style[i], label=labels[i])
+            ax.plot(data[3*i], data[3*i+1], style_wo_mark[i])
+            sig_idx = []
+            sig_data = []
+            for (k, item) in enumerate(data[3*i+1]):
+                if data[3*i+2][k] == 0:
+                    sig_idx.append(data[3*i][k])
+                    sig_data.append(item)
+            ax.plot(sig_idx, sig_data, style[i], label=labels[i])
         ax.set_ylabel('Pearson Correlation Coefficient', fontsize=FONTSIZE)
         ax.set_xlabel('Test Suite Size', fontsize=FONTSIZE)
         # ax.set_title(self.title.replace('_', '\\_'))
